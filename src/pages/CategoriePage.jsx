@@ -7,19 +7,20 @@ function CategoriePage({ category }) {
     const [elems, setElems] = useState([]);
 
     useEffect(() => {
+        async function getElems() {
+            const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+            try {
+                const res = await axios.get(URL);
+                setElems(res.data.meals);
+                console.log(res.data.meals);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        }
         getElems();
     }, [category]);
 
-    async function getElems() {
-        const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
-        try {
-            const res = await axios.get(URL);
-            setElems(res.data.meals);
-            console.log(res.data.meals);
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }
+
 
     return (
         <div>

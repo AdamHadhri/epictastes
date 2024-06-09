@@ -23,80 +23,55 @@ function Home() {
   const URL2 = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
 
   useEffect(() => { 
+    async function getIngredients() {
+      try {
+        const res = await axios.get(URL2);
+        setIngs(res.data.meals.slice(0, 24));
+        setAllings(res.data.meals)
+      } catch (error) {
+        console.error('Error fetching ingredients:', error);
+      }
+    }
+    async function getCategories() {
+      try {
+        const res = await axios.get(URL);
+        setCategories(res.data.categories);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    }
     getCategories();
     getIngredients();
   }, []);
 
   useEffect(() => {
+    async function getAllMeals() {
+      const allMeals = []; // Initialize an array to store all meals
+  
+      for (const category of categories) {
+          const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`;
+          try {
+              const res = await axios.get(URL);
+              allMeals.push(...res.data.meals); // Append new meals to the allMeals array
+          } catch (error) {
+              console.error('Error fetching categories:', error);
+          }
+      }
+      setElems(allMeals);
+    }
     if (categories.length > 0) {
       getAllMeals();
     }
   }, [categories]);
 
-  // useEffect(() => {
-  //   if (ings.length > 0) {
-  //     getAllIngs();
-  //   }
-  // }, [ings]);
-  
-  async function getCategories() {
-    try {
-      const res = await axios.get(URL);
-      setCategories(res.data.categories);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  }
-
-  async function getIngredients() {
-    try {
-      const res = await axios.get(URL2);
-      setIngs(res.data.meals.slice(0, 24));
-      setAllings(res.data.meals)
-    } catch (error) {
-      console.error('Error fetching ingredients:', error);
-    }
-  }
-
-
-  async function getAllMeals() {
-    const allMeals = []; // Initialize an array to store all meals
-
-    for (const category of categories) {
-        const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category.strCategory}`;
-        try {
-            const res = await axios.get(URL);
-            allMeals.push(...res.data.meals); // Append new meals to the allMeals array
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    }
-    setElems(allMeals);
-}
-
-//   async function getAllIngs() {
-//     const allIngs = [];
-
-//     for (const ing of ings) {
-//         const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ing.strMeal}`;
-//         try {
-//             const res = await axios.get(URL);
-//             allIngs.push(...res.data.meals);
-//         } catch (error) {
-//             console.error('Error fetching categories:', error);
-//         }
-//     }
-//     console.log(allIngs)
-//     setAllings(allIngs);
-// }
 
   return (
     <div>
       <CategoriesContext.Provider value={{ categories, areas, ings }}>
         <BrowserRouter>
           <div className='flex items-center justify-between w-full h-28 bg-orange-500'>
-            <Link to="/">
-              <img src="logo.svg" className='px-5 h-16' alt="epic tastes" />
+            <Link to="/epictastes">
+              <img src={`${process.env.PUBLIC_URL}/logo.svg`} className='px-5 h-16' alt="epic tastes" />
             </Link>
             <Search/>
             <button className='hover:bg-orange-700 rounded-xl mx-5'>
@@ -104,7 +79,7 @@ function Home() {
             </button>
           </div>
           <Routes>
-            <Route path="/" element={<Default />} />
+            <Route path="/epictastes" element={<Default />} />
             
             {categories.map((category) => (
               <Route

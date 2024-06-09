@@ -9,52 +9,50 @@ function Meal({ id }) {
     const [nbings, setNbings] = useState([]);
 
     useEffect(() => {
+        async function getMeal() {
+            const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+            try {
+                const res = await axios.get(URL);
+                const fetchedMeal = res.data.meals[0];
+                setMeal(fetchedMeal);
+                console.log(fetchedMeal)
+                setIns(fetchedMeal.strInstructions.split('\r\n').filter(function(element) {
+                    return isNaN(element);
+                }));
+            } catch (error) {
+                console.error('Error fetching meal:', error);
+            }
+        }
         getMeal();
     }, [id]);
 
     useEffect(() => {
+        function getIngs() {
+            const ingredients = [];
+            for (let i = 1; i <= 20; i++) {
+                let ingredient = meal[`strIngredient${i}`];
+                if (ingredient) {
+                    ingredients.push(ingredient);
+                }
+            }
+            setIngs(ingredients);
+        }
+    
+        function getNbIngs() {
+            const measures = [];
+            for (let i = 1; i <= 20; i++) {
+                let measure = meal[`strMeasure${i}`];
+                if (measure) {
+                    measures.push(measure);
+                }
+            }
+            setNbings(measures);
+        }
         if (meal) {
             getIngs();
             getNbIngs();
         }
     }, [meal]);
-
-    function getIngs() {
-        const ingredients = [];
-        for (let i = 1; i <= 20; i++) {
-            let ingredient = meal[`strIngredient${i}`];
-            if (ingredient) {
-                ingredients.push(ingredient);
-            }
-        }
-        setIngs(ingredients);
-    }
-
-    function getNbIngs() {
-        const measures = [];
-        for (let i = 1; i <= 20; i++) {
-            let measure = meal[`strMeasure${i}`];
-            if (measure) {
-                measures.push(measure);
-            }
-        }
-        setNbings(measures);
-    }
-
-    async function getMeal() {
-        const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-        try {
-            const res = await axios.get(URL);
-            const fetchedMeal = res.data.meals[0];
-            setMeal(fetchedMeal);
-            console.log(fetchedMeal)
-            setIns(fetchedMeal.strInstructions.split('\r\n').filter(function(element) {
-                return isNaN(element);
-            }));
-        } catch (error) {
-            console.error('Error fetching meal:', error);
-        }
-    }
 
     return (
         <div className='pl-5'>
