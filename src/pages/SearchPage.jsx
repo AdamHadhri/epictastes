@@ -1,40 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
-import GradientCover from '../components/CatCard';
+import GradientCover from '../components/CatCard'; // Assuming CatCard is the correct component
 import axios from 'axios';
-import { CategoriesContext } from './Home';
 import { Link } from 'react-router-dom';
+import {CategoriesContext} from './Home'
+import NoResult from '../components/NoResult';
 
-function SearchPage() {
-    const [elems, setElems] = useState([]);
-    const { allings } = useContext(CategoriesContext);
 
-    useEffect(() => { getSearch() }, [allings]);
+function SearchPage() { // Destructure the props to access 'search'
+  const [elems, setElems] = useState([]);
 
+  const {search} = useContext(CategoriesContext);
+
+  useEffect(() => {
     async function getSearch() {
-        const URL = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
-        try {
-          const res = await axios.get(URL);
-          setElems(res.data.meals);
-          console.log(elems)
-        } catch (error) {
-          console.error('Error fetching ingredients:', error);
-        }
+      const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
+      try {
+        const res = await axios.get(URL);
+        setElems(res.data.meals);
+      } catch (error) {
+        console.error('Error fetching ingredients:', error);
       }
+    }
+    getSearch();
+  }, [search]);
 
-    return (
-        <div className='flex flex-col'>
-            <div className=" pl-32 py-5 font-semibold text-3xl flex flex-row">Search results for ...</div>
-            <div className='flex flex-row flex-wrap gap-10 justify-center'>
-               {elems.map((elem) => (
-                <Link key={elem.idIngredient} to={`/${elem.strIngredient}`}>
-                  <GradientCover key={elem.idIngredient} 
-                  title={elem.strIngredient}
-                  imgSrc={`https://www.themealdb.com/images/ingredients/${elem.strIngredient}.png`} />
-                </Link>
-            ))} 
-            </div>
-        </div>
-    );
+  return (
+    <div className='flex flex-col items-center'>
+      <div className=" py-5 font-semibold text-3xl flex flex-row text-orange-700">Search results for "{search}"</div>
+      <div className='flex flex-row flex-wrap gap-10 justify-center'>
+        { elems ? (elems.map((elem) => (
+          <Link key={elem.idMeal} to={`/${elem.idMeal}`}>
+            <GradientCover
+              title={elem.strMeal}
+              imgSrc={elem.strMealThumb}
+            />
+          </Link>
+        ))) : (<NoResult/>) }
+      </div>
+    </div>
+  );
 }
 
 export default SearchPage;

@@ -21,7 +21,7 @@ function IngAllPage() {
 
     return (
         <div className='flex flex-col'>
-            <div className="pl-32 py-5 font-semibold text-3xl flex flex-row  text-orange-700">All Ingredients</div>
+            <div className="pl-32 py-5 font-semibold text-3xl flex flex-row text-orange-700">All Ingredients</div>
             <div className='flex flex-row flex-wrap gap-10 justify-center'>
                 {elems.map((elem) => (
                     <Link key={elem.idIngredient} to={`/${elem.strIngredient}`}>

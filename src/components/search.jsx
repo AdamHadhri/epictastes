@@ -23,7 +23,7 @@ function Search() {
     </svg>
   </button>
   <input
-    className="input rounded-full px-8 py-3 w-[500px] border-2 border-transparent focus:outline-none focus:border-orange-800 placeholder-gray-400 transition-all duration-300 shadow-md"
+    className="input rounded-full px-8 py-3 lg:w-[500px] sm:w-[100px] border-2 border-transparent focus:outline-none focus: border-orange placeholder-gray-400 transition-all duration-300 shadow-md"
     placeholder="Search..."
     required=""
     type="text"

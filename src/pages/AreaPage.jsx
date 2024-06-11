@@ -11,7 +11,6 @@ function AreaPage({ area }) {
             try {
                 const res = await axios.get(URL);
                 setElems(res.data.meals);
-                console.log(res.data.meals);
             } catch (error) {
                 console.error('Error fetching categories:', error);
             }

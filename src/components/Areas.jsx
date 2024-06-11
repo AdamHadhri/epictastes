@@ -25,7 +25,7 @@ function Areas() {
               <Link to={`/${area.strArea}`}>
                 <GradientCover
                   title={area.strArea}
-                  imgSrc={ area.isoCode === 'unknown' ? '/unkown.png' :`https://flagcdn.com/h240/${area.isoCode}.png`}
+                  imgSrc={ area.isoCode === 'unknown' ? `${process.env.PUBLIC_URL}/unkown.png` :`https://flagcdn.com/h240/${area.isoCode}.png`}
                   />
                 </Link>
             </SplideSlide>
