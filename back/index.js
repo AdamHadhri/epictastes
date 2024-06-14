@@ -6,11 +6,11 @@ const cors = require('cors');
 const app = express();
 
 // Middleware
-app.use(cors({
-    origin: ["https://epictastes.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
-}));
+// app.use(cors({
+//     origin: ["https://epictastes.vercel.app"],
+//     methods: ["POST", "GET"],
+//     credentials: true
+// }));
 
 app.use(express.json());
 

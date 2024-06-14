@@ -51,7 +51,7 @@ function Meal({ id }) {
     useEffect(() => {
         async function checkStatus() {
             try {
-                const res = await axios.get(`http://localhost:3000/status/${id}`);
+                const res = await axios.get(`https://epictastes.vercel.app/status/${id}`);
                 const status = res.data.loved;
                 setLove(status);  
             } catch (error) {
@@ -67,13 +67,13 @@ function Meal({ id }) {
     async function addToWishlist() {
         try {
             if (!love) {
-                await axios.post('http://localhost:3000/ajouter', {
+                await axios.post('https://epictastes.vercel.app/ajouter', {
                     id: meal.idMeal,
                     name: meal.strMeal,
                     src: meal.strMealThumb
                 });
             } else {
-                await axios.get(`http://localhost:3000/supprimer/${meal.idMeal}`);
+                await axios.get(`https://epictastes.vercel.app/supprimer/${meal.idMeal}`);
             }
             setLove(!love);
         } catch (error) {

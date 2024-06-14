@@ -8,10 +8,11 @@ function Wishlist() {
   
     useEffect(() => {
       async function getWishlist() {
-        const URL = "http://localhost:3000/lister";
+        const URL = "https://epictastes.vercel.app/lister";
         try {
           const res = await axios.get(URL);
           setElems(res.data.itemList);
+          console.log(res.data.itemList);
         } catch (error) {
           console.error('Error fetching ingredients:', error);
         }
