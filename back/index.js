@@ -9,7 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 // Define your routes
-
+// Default endpoint
+app.get('/', (req, res) => {
+    res.send("Hello");
+});
 // Endpoint to add a new item
 app.post('/ajouter', async (req, res) => {
     const newItem = {
@@ -69,11 +72,6 @@ app.get('/status/:id', async (req, res) => {
         console.error('Error fetching item:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
-});
-
-// Default endpoint
-app.get('/', (req, res) => {
-    res.send("Hello");
 });
 
 // Endpoint to list all items
