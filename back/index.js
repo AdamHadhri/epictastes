@@ -5,14 +5,17 @@ const cors = require('cors');
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Define your routes
+// Routes
+
 // Default endpoint
 app.get('/', (req, res) => {
     res.send("Hello");
 });
+
 // Endpoint to add a new item
 app.post('/ajouter', async (req, res) => {
     const newItem = {
@@ -96,6 +99,8 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.log("Database connection successfully established");
 }).catch((error) => {
     console.error('Database connection error:', error);
+    process.exit(1); // Exit the process if unable to connect to MongoDB
 });
 
+// Export the Express app
 module.exports = app;
