@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Item = require('./back/Models/Item'); // Adjust path as needed
+const Item = require('./Models/Item'); // Adjust path as needed
 const cors = require('cors');
 
 const app = express();
