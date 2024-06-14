@@ -9,7 +9,7 @@ import BlurImageLoader from 'react-blur-image-loader';
 export default function GradientCover( {title , imgSrc}  ) {
 
   return (
-    <Card  align='center' sx={{ height: 200, width: 200, borderRadius: 140, overflow: 'hidden',  }}>
+    <Card className="hidden" align='center' sx={{ height: 200, width: 200, borderRadius: 140, overflow: 'hidden',  }}>
       <CardCover>
         <BlurImageLoader src={imgSrc}
                         preview={"tiny-picture.jpg"} 

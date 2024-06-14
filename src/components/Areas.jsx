@@ -10,7 +10,7 @@ function Areas() {
 
   return (
     <div className="flex flex-col">
-      <p className="pl-20 py-5 font-semibold text-3xl text-orange-700">Areas</p>
+      <p className="flex justify-center py-5 font-semibold text-3xl text-orange-700">Areas</p>
       <Splide
         options={{
           perPage: 6,

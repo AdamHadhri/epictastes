@@ -10,7 +10,7 @@ function Ingrediants() {
 
   return (
     <div className="flex flex-col">
-      <div className="pl-20 py-5 text-3xl flex flex-row">
+      <div className="flex justify-center py-5 text-3xl flex-row">
         <p className=' font-semibold mr-5 text-orange-700'>Ingredients</p> 
         <div style={{textDecoration: 'underline', fontSize: "1.5rem"}}> (
           <Link to='/Ingradients' style={{color: 'orange',textDecoration: 'underline', fontSize: "1.5rem"}}>See All

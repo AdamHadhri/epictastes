@@ -11,7 +11,7 @@ function Categories() {
 
   return (
     <div className="flex flex-col">
-      <p className="pl-20 py-5 font-semibold text-3xl text-orange-700">Categories</p>
+      <p className="flex justify-center py-5 font-semibold text-3xl text-orange-700">Categories</p>
       <Splide
         options={{
           perPage: 7,
