@@ -100,5 +100,4 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('Database connection error:', error);
 });
 
-// Export the Express app
 module.exports = app;
