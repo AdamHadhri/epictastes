@@ -4,11 +4,9 @@ const Item = require('../back/Models/Item');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-
 
 app.post('/ajouter', async (req, res) => {
     const newItem = {
@@ -51,7 +49,6 @@ app.get('/supprimer/:id', async (req, res) => {
     }
 });
 
-
 app.get('/status/:id', async (req, res) => {
     const idToEdit = req.params.id;
 
@@ -59,12 +56,10 @@ app.get('/status/:id', async (req, res) => {
         const item = await Item.findOne({ id: idToEdit });
 
         if (!item) {
-            // return res.status(404).json({ message: 'Item not found' });
             res.json({ loved: false });
         } else {
             res.json({ loved: item.loved });
         }
-        
     } catch (error) {
         console.error('Error fetching item:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -84,13 +79,11 @@ app.get('/lister', async (req, res) => {
     }
 });
 
-mongoose.connect('mongodb+srv://adamhadhri11:9kUU7AoRiJj4Lhbh@mealdb.ehsmpic.mongodb.net/?retryWrites=true&w=majority&appName=MealDB', {
+mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => {
     console.log("Database connection successfully established");
 }).catch((error) => {
     console.error('Database connection error:', error);
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+module.exports = app;
