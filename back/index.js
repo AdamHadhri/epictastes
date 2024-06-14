@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Item = require('../back/Models/Item');
+const Item = require('./back/Models/Item'); // Adjust path as needed
 const cors = require('cors');
 
 const app = express();
@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Define your routes
 app.post('/ajouter', async (req, res) => {
     const newItem = {
         id: req.body.id,
@@ -90,4 +91,5 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('Database connection error:', error);
 });
 
+// Export the Express app
 module.exports = app;
