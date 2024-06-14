@@ -67,8 +67,9 @@ app.get('/status/:id', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("Hello");
 });
+
 app.get('/lister', async (req, res) => {
     try {
         const itemList = await Item.find({});
