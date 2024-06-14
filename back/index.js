@@ -9,6 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 // Define your routes
+
+// Endpoint to add a new item
 app.post('/ajouter', async (req, res) => {
     const newItem = {
         id: req.body.id,
@@ -30,10 +32,11 @@ app.post('/ajouter', async (req, res) => {
         console.log("Document saved successfully");
     } catch (error) {
         console.error('Error saving item:', error);
-        res.status(500).json({ message: "An error occurred", error });
+        res.status(500).json({ message: "An error occurred", error: error.message });
     }
 });
 
+// Endpoint to delete an item by ID
 app.get('/supprimer/:id', async (req, res) => {
     const idToRemove = req.params.id;
 
@@ -44,12 +47,13 @@ app.get('/supprimer/:id', async (req, res) => {
             return res.status(404).json({ error: "Item not found" });
         }
 
-        res.status(200).json({ message: idToRemove });
+        res.status(200).json({ message: `Item with ID ${idToRemove} deleted` });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
 
+// Endpoint to get status of an item by ID
 app.get('/status/:id', async (req, res) => {
     const idToEdit = req.params.id;
 
@@ -67,10 +71,12 @@ app.get('/status/:id', async (req, res) => {
     }
 });
 
+// Default endpoint
 app.get('/', (req, res) => {
     res.send("Hello");
 });
 
+// Endpoint to list all items
 app.get('/lister', async (req, res) => {
     try {
         const itemList = await Item.find({});
@@ -84,7 +90,10 @@ app.get('/lister', async (req, res) => {
     }
 });
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 }).then(() => {
     console.log("Database connection successfully established");
 }).catch((error) => {
