@@ -97,7 +97,7 @@ app.get('/lister', async (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://adamhadhri11:Xrr3ew3h0H1A2t0F@mealdb.ehsmpic.mongodb.net/?retryWrites=true&w=majority&appName=MealDB", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
