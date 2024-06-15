@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/epictastes/static/css/main.a84b3b0a.css",
-    "main.js": "/epictastes/static/js/main.1da51e71.js",
+    "main.css": "/epictastes/static/css/main.a573ed65.css",
+    "main.js": "/epictastes/static/js/main.eb61ff45.js",
     "index.html": "/epictastes/index.html",
-    "main.a84b3b0a.css.map": "/epictastes/static/css/main.a84b3b0a.css.map",
-    "main.1da51e71.js.map": "/epictastes/static/js/main.1da51e71.js.map"
+    "main.a573ed65.css.map": "/epictastes/static/css/main.a573ed65.css.map",
+    "main.eb61ff45.js.map": "/epictastes/static/js/main.eb61ff45.js.map"
   },
   "entrypoints": [
-    "static/css/main.a84b3b0a.css",
-    "static/js/main.1da51e71.js"
+    "static/css/main.a573ed65.css",
+    "static/js/main.eb61ff45.js"
   ]
 }
