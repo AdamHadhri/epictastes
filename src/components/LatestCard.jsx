@@ -3,17 +3,17 @@ import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
-import '../index.css'
+import 'lazysizes';
 
-export default function GradientCover( {title , imgSrc}  ) {
-
+export default function GradientCover({ title, imgSrc }) {
   return (
-    <Card className="drag" sx={{ height: {md: 140 , sm: 120, xs: 70 },
-                width: {md: 200 ,  sm: 180 , xs: 110 },
-                borderRadius: {md: 25 ,  sm: 20 , xs: 15 },
-                overflow: 'hidden' }}>
+    <Card className='select-none' 
+    sx={{ height: { md: 280, sm: 220, xs: 200 },
+          width: { md: 280, sm: 220, xs: 200 },
+          borderRadius: 20,
+          overflow: 'hidden' }}>
       <CardCover>
-        <img className="lazyload" data-src={imgSrc} alt=""/>
+        <img className="lazyload" data-src={imgSrc} alt={title} />
       </CardCover>
       <CardCover
         sx={{
@@ -22,7 +22,7 @@ export default function GradientCover( {title , imgSrc}  ) {
         }}
       />
       <CardContent sx={{ justifyContent: 'flex-end' }}>
-        <Typography level="title-lg" textColor="#fff">
+        <Typography sx={{ fontSize: { sm: '1.5rem', xs: '1rem' } }} level="h2" textColor="#fff">
           {title}
         </Typography>
       </CardContent>

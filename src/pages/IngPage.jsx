@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GradientCover from '../components/CatCard';
 import axios from 'axios';
+import '@splidejs/react-splide/css';
 import { Link } from 'react-router-dom';
 
 function IngPage({ ing }) {
@@ -23,17 +24,17 @@ function IngPage({ ing }) {
 
     return (
         <div>
-            <div className=" pl-24 pt-10 font-semibold text-4xl flex flex-row text-orange-700">{ing} Meals:</div>
-            <div className='flex flex-row flex-wrap gap-10 my-10 justify-center'>
+            <div className="flex justify-center lg:py-10 md:py-8 sm:py-7 py-7 font-semibold text-2xl md:text-3xl lg:text-4xl text-orange-700">{ing} Meals</div>
+            <div className='flex flex-wrap gap-10 justify-center pb-5'>
                 {elems.map((elem) => (
-                    <Link key={elem.idMeal} to={`/${elem.idMeal}`}>
-                        <GradientCover
-                        key={elem.idMeal} 
-                        title={elem.strMeal} 
-                        imgSrc={elem.strMealThumb} />
-                    </Link>
+                        <Link key={elem.idMeal} to={`/${elem.idMeal}`}>
+                            <GradientCover
+                            key={elem.idMeal} 
+                            title={elem.strMeal} 
+                            imgSrc={elem.strMealThumb} />
+                        </Link>
                 ))}
-            </div>
+                </div>
         </div>
     );
 }

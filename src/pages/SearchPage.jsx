@@ -26,8 +26,8 @@ function SearchPage() { // Destructure the props to access 'search'
 
   return (
     <div className='flex flex-col items-center'>
-      <div className=" py-5 font-semibold text-3xl flex flex-row text-orange-700">Search results for "{search}"</div>
-      <div className='flex flex-row flex-wrap gap-10 justify-center'>
+      <div className="flex justify-center lg:py-10 md:py-8 sm:py-7 py-7 font-semibold text-2xl md:text-3xl lg:text-4xl text-orange-700">Search results for "{search}"</div>
+      <div className='flex flex-row flex-wrap gap-10 pb-5 justify-center'>
         { elems ? (elems.map((elem) => (
           <Link key={elem.idMeal} to={`/${elem.idMeal}`}>
             <GradientCover

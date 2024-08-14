@@ -22,8 +22,8 @@ function AreaPage({ area }) {
 
     return (
         <div>
-            <div className=" pl-24 pt-10 font-semibold text-4xl flex flex-row text-orange-700">{area} Meals:</div>
-            <div className='flex flex-row flex-wrap gap-10 my-10 justify-center'>
+            <div className="flex justify-center lg:py-10 md:py-8 sm:py-7 py-7 font-semibold text-2xl md:text-3xl lg:text-4xl text-orange-700">{area} Meals</div>
+            <div className='flex flex-row flex-wrap gap-10 justify-center pb-5'>
                 {elems.map((elem) => (
                     <Link key={elem.idMeal} to={`/${elem.idMeal}`}>
                         <GradientCover

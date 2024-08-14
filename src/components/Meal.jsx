@@ -84,8 +84,8 @@ function Meal({ id }) {
     return (
         <div className='flex flex-col justify-center gap-5 py-3'>
             <div>
-                <p className='flex justify-center text-4xl font-bold mt-5 text-orange-500'>{meal ? meal.strMeal : 'Loading...'}</p>
-                <div className='flex justify-center text-2xl ml-3 my-2 font-normal gap-3'>
+                <p className='flex justify-center text-balance text-center text-2xl md:text-3xl lg:text-4xl font-bold mt-5 text-orange-500'>{meal ? meal.strMeal : 'Loading...'}</p>
+                <div className='flex justify-center text-lg md:text-xl lg:text-2xl ml-3 my-2 font-normal gap-3'>
                     <p className='font-semibold text-orange-700'>Category: </p> {meal ? meal.strCategory : '***'}
                     <p className='font-semibold text-orange-700'>Area: </p> {meal ? meal.strArea : '***'}
                 </div>
@@ -100,22 +100,24 @@ function Meal({ id }) {
                 {meal && (
                     <img
                         src={meal.strMealThumb}
-                        className='flex justify-center object-cover w-[500px] h-[300px] rounded-2xl'
+                        className='flex justify-center object-cover sm:w-[300px] md:w-[500px] lg:w-[500px] w-[300px] h-[200px] lg:h-[300px] md:h-[250px] sm:h-[200px] rounded-2xl'
                         alt={meal.strMeal}
                     />
                 )}
             </div>
             <div className='flex flex-col justify-center'>
-                <p className='flex justify-center text-3xl ml-4 mb-4 font-semibold text-orange-400'>Ingredients</p>
-                <div className='flex flex-wrap gap-7 justify-center px-40'>
-                    {ings.map((ingredient, index) => (
-                        <IngImg key={index} img={`https://www.themealdb.com/images/ingredients/${ingredient}.png`} title={ingredient} description={nbings[index]} />
-                    ))}
+                <p className='flex justify-center text-2xl md:text-3xl lg:text-4xl ml-4 mb-4 font-semibold text-orange-400'>Ingredients</p>
+                <div className='flex justify-center'>  
+                    <div className='flex flex-wrap gap-2 md:gap-5 lg:gap-7 justify-center w-[1200px]' >
+                        {ings.map((ingredient, index) => (
+                            <IngImg key={index} img={`https://www.themealdb.com/images/ingredients/${ingredient}.png`} title={ingredient} description={nbings[index]} />
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className='flex flex-col items-center'>
-                <p className='flex justify-center text-3xl ml-4 mb-2 font-bold text-orange-400'>Instructions</p>
-                <ul className="px-60 list-disc text-xl mb-5">
+                <p className='flex justify-center text-2xl md:text-3xl lg:text-4xl ml-4 mb-2 font-bold text-orange-400'>Instructions</p>
+                <ul className="w-[70%] list-disc text-xl mb-5">
                     {ins.map((line, index) => (
                         <li key={index}>{line}</li>
                     ))}
@@ -124,18 +126,15 @@ function Meal({ id }) {
             <div className='flex justify-center'>
                 {meal ? (
                     meal.strYoutube !== "" ? (
-                        <iframe
+                        <iframe className=' lg:w-[500px] md:w-[400px] w-[300px] lg:h-[300px] md:h-[200px] h-[200px] '
                             style={{ borderRadius: '1rem' }}
-                            width="685"
-                            height="385"
                             src={`https://www.youtube.com/embed/${meal.strYoutube.split('=')[1]}?rel=0`}
                             title={meal.strMeal}
                             allowFullScreen
                         ></iframe>
                     ) : (
-                        <img
+                        <img className=' lg:w-[500px] md:w-[400px] rounded-xl sm:w-[300px] w-[300px] lg:h-[300px] md:h-[200px] sm:h-[200px] h-[200px]'
                             src={`${process.env.PUBLIC_URL}/error.jpg`}
-                            style={{ height: "385px", borderRadius: '1rem' }}
                             alt="No video available"
                         />
                     )

@@ -19,24 +19,28 @@ function Home() {
   const [elems, setElems] = useState([]);
   const [ings, setIngs] = useState([]);
   const [allings, setAllings] = useState([]);
+  const [latest, setLatest] = useState([]);
   const [search, setSearch] = useState();
 
   const navigate = useNavigate();
 
   const CATEGORIES_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
   const INGREDIENTS_URL = "https://www.themealdb.com/api/json/v1/1/list.php?i=list";
+  const LATEST_URL = "https://www.themealdb.com/api/json/v2/1/latest.php"
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [categoriesRes, ingredientsRes] = await Promise.all([
+        const [categoriesRes, ingredientsRes ,latestRes] = await Promise.all([
           axios.get(CATEGORIES_URL),
           axios.get(INGREDIENTS_URL),
+          axios.get(LATEST_URL),
         ]);
 
         setCategories(categoriesRes.data.categories);
         setIngs(ingredientsRes.data.meals.slice(0, 24));
         setAllings(ingredientsRes.data.meals);
+        setLatest(latestRes.data.meals);
 
         const allMeals = [];
         for (const category of categoriesRes.data.categories) {
@@ -64,15 +68,15 @@ function Home() {
 
   return (
     <div>
-      <CategoriesContext.Provider value={{ categories, areas, ings, search }}>
+      <CategoriesContext.Provider value={{ categories, areas, ings, search, latest }}>
         <div className='flex items-center px-3 justify-between w-full lg:h-28 sm:h-20 h-20 bg-orange-500'>
         <Link to="/" className='flex flex-row items-center justify-between gap-3 ml-5'>
-          <img src={`${process.env.PUBLIC_URL}/logo1.svg`} className='h-16' alt="epic tastes" />
-          <img src={`${process.env.PUBLIC_URL}/logo2.svg`} className='hidden sm:hidden md:flex lg:flex h-6' alt="epic tastes" />
+          <img src={`${process.env.PUBLIC_URL}/logo1.svg`} className='h-16 w-16' alt="epic tastes" />
+          <img src={`${process.env.PUBLIC_URL}/logo2.svg`} className='hidden sm:hidden md:flex lg:flex h-6 w-40' alt="epic tastes" />
         </Link>
-          <form className="form w-[40%] relative" onSubmit={(e) => e.preventDefault()}>
+          <form id='srch' className="form w-[40%] relative" onSubmit={(e) => e.preventDefault()}>
             <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1">
-              <img src={`${process.env.PUBLIC_URL}/search.svg`} alt='search' />
+              <img src={`${process.env.PUBLIC_URL}/search.svg`} className=' h-5 w-5' alt='search' />
             </button>
             <input
               onKeyDown={handleKeyDown}
@@ -83,8 +87,8 @@ function Home() {
             />
           </form>
           <Link to="./Wishlist" className='hover:bg-orange-700 rounded-xl px-4 py-4 gap-3 flex justify-center items-center'>
-            <img src={`${process.env.PUBLIC_URL}/saved.svg`} className='h-7' alt="wishlist" />
-            <img src={`${process.env.PUBLIC_URL}/heart2.svg`} className='hidden sm:hidden md:flex lg:flex h-6' alt="wishlist" />
+            <img src={`${process.env.PUBLIC_URL}/saved.svg`} className='h-7 w-7' alt="wishlist" />
+            <img src={`${process.env.PUBLIC_URL}/heart2.svg`} className='hidden sm:hidden md:flex lg:flex h-6 w-32' alt="wishlist" />
           </Link>
         </div>
         <Routes>
@@ -103,13 +107,7 @@ function Home() {
               element={<AreaPage area={area.strArea} />}
             />
           ))}
-          {ings.map((ing) => (
-            <Route
-              key={ing.idIngredient}
-              path={`/${ing.strIngredient}`}
-              element={<IngPage ing={ing.strIngredient} />}
-            />
-          ))}
+
           {elems.map((elem) => (
             <Route
               key={elem.idMeal}
@@ -121,7 +119,7 @@ function Home() {
             <Route
               key={alling.idIngredient}
               path={`/${alling.strIngredient}`}
-              element={<Meal id={alling.strIngredient} />}
+              element={<IngPage ing={alling.strIngredient} />}
             />
           ))}
           <Route path='/Ingradients' element={<IngAllPage />} />

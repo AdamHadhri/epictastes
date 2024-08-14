@@ -36,3 +36,18 @@ img {
     white-space: nowrap;
     height: 25px;
 }
+.latest{
+    transform: scale(0.8, 0.8); /* sets all slides to a scaling of 0.8 (80%) */
+    display: inline-flex;  /* used for all slides vertical align center */
+    vertical-align: middle; /* used for all slides vertical align center */
+  }
+.drag {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+* {
+  user-select: none;
+}

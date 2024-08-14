@@ -3,18 +3,17 @@ import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
-import BlurImageLoader from 'react-blur-image-loader';
+import 'lazysizes';
 
 export default function GradientCover( {title , imgSrc}  ) {
 
   return (
-    <Card sx={{ minHeight: '280px', width: 320, borderRadius: 20, overflow: 'hidden' }}>
+    <Card sx={{ width: { lg: 320, md: 300,  sm: 200, xs: 150 },
+                height: { lg: 280, md: 250,  sm: 170, xs: 120 },
+                borderRadius: { lg: 20, md: 18,  sm: 17, xs: 15 },
+                 overflow: 'hidden' }}>
       <CardCover>
-        <BlurImageLoader loading="lazy" src={imgSrc}
-                        preview={"tiny-picture.jpg"} 
-                        fullCover={true}
-                        maxBlurLevel={10}
-                        transitionTime={400}/>
+      <img className="lazyload" data-src={imgSrc} alt=""/>
                         
       </CardCover>
       <CardCover

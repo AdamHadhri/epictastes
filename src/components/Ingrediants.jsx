@@ -10,7 +10,7 @@ function Ingrediants() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex justify-center py-5 text-3xl flex-row">
+      <div className="flex justify-center pb-5 text-3xl flex-row">
         <p className=' font-semibold mr-5 text-orange-700'>Ingredients</p> 
         <div style={{textDecoration: 'underline', fontSize: "1.5rem"}}> (
           <Link to='/Ingradients' style={{color: 'orange',textDecoration: 'underline', fontSize: "1.5rem"}}>See All
@@ -20,10 +20,27 @@ function Ingrediants() {
       <Splide
         options={{
           perPage: 8,
+          breakpoints: {
+            640: {
+              perPage: 3,
+              padding: 20,
+              gap: 40,
+            },
+            900: {
+              perPage: 4,
+              padding: 30,
+              gap: 30,
+            },
+            1500: {
+              perPage: 6,
+              padding: 20,
+              gap: 40,
+            }
+          },
           pagination: false,
-          gap: 60,
           drag: 'free',
           padding: 60,
+          gap: 30
         }}
         className="flex flex-row">
         {ings.map((ing) => (

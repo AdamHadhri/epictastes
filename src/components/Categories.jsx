@@ -11,19 +11,36 @@ function Categories() {
 
   return (
     <div className="flex flex-col">
-      <p className="flex justify-center py-5 font-semibold text-3xl text-orange-700">Categories</p>
+      <p className="flex justify-center pb-5 font-semibold text-3xl text-orange-700">Categories</p>
       <Splide
         options={{
-          perPage: 7,
+          perPage: 6,
+          breakpoints: {
+            640: {
+              perPage: 3,
+              padding: 30,
+              gap: 30,
+            },
+            900: {
+              perPage: 4,
+              padding: 30,
+              gap: 30,
+            },
+            1300: {
+              perPage: 5,
+              padding: 50,
+              gap: 40,
+            }
+          },
           pagination: false,
-          gap: 60,
           drag: 'free',
           padding: 60,
+          gap: 120
         }}
         className="flex flex-row">
         {categories.map((category) => (
             <SplideSlide key={category.idCategory} className="rounded-full">
-              <Link  to={`/${category.strCategory}`}>
+              <Link to={`/${category.strCategory}`}>
                 <GradientCover
                   title={category.strCategory}
                   imgSrc={category.strCategoryThumb} />
